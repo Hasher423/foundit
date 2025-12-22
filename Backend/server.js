@@ -9,13 +9,13 @@ import morgan from 'morgan';
 DbConnection();
 
 const app = express();
-
+ 
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser());
 app.use(morgan('dev'))
-
+console.log(process.env.FRONTEND_URI)
 app.use(cors({
     origin: process.env.FRONTEND_URI,
     credentials: true
