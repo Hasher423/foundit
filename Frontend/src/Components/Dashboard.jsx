@@ -10,7 +10,7 @@ const Dashboard = () => {
     const logoutHandler = async (e) => {
         e.preventDefault();
 
-        const logoutResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URI}user/auth/logout`, {
+        const logoutResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/user/auth/logout`, {
             withCredentials: true,
 
         })

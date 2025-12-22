@@ -8,7 +8,7 @@ const RefreshHandler = ({ setIsAutheticated }) => {
     const navigate = useNavigate();
     const checkLogin = async () => {
 
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URI}user/auth/isloggedIn`, {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/user/auth/isloggedIn`, {
             withCredentials: true,
         })
 
