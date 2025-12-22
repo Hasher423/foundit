@@ -10,7 +10,7 @@ export default function Login() {
     const handleGoogleLogin = async (authResult) => {
         try {
             if (authResult['code']) {
-                const result = await axios.get(`${import.meta.env.VITE_BACKEND_URI}user/auth/google?code=${authResult['code']}`, {
+                const result = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/user/auth/google?code=${authResult['code']}`, {
                     withCredentials: true
                 });
                 console.log(result, "Done");
