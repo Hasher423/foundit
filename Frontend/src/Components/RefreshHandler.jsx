@@ -21,9 +21,7 @@ const RefreshHandler = ({ setIsAutheticated }) => {
 
                 if (loggedIn) {
                     setIsAutheticated(true);
-                    if (window.location.pathname === '/' || window.location.pathname === '/login') {
-                        navigate('/dashboard');
-                    }
+                    navigate('/dashboard');
                 } else {
                     setIsAutheticated(false);
                     navigate('/login');
