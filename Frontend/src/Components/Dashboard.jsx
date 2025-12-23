@@ -16,6 +16,7 @@ const Dashboard = () => {
         })
         const { success } = logoutResponse.data;
         if (success) {
+            setuser('')
             navigate('/login')
         }
 
