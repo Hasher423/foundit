@@ -24,9 +24,8 @@ const Dashboard = () => {
 
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem('user-info'));
-        console.log(data); // This will show the whole object with user & token
         if (data?.user) {
-            setuser(data.user); // Set the actual user object
+            setuser(data.user); 
         }
     }, []);
 

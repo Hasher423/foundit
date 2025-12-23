@@ -18,16 +18,16 @@ const App = () => {
   }
 
   const PrivateRoute = ({ element }) => {
-    return isAutheticated ? element : <Navigate to={'/login'} replace />
+    return isAutheticated ? element : <Navigate to={'/login'} replace/>
   }
 
 
   return (
     <div>
-      {/* <RefreshHandler setIsAutheticated={setIsAutheticated} /> */}
+      <RefreshHandler setIsAutheticated={setIsAutheticated} />
       <Routes>
         <Route path='/login' element={<GoogleAuthWrapper />} />
-        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/dashboard' element={<PrivateRoute element={<Dashboard />} />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>
