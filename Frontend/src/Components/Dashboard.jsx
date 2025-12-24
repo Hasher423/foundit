@@ -16,6 +16,7 @@ const Dashboard = () => {
         })
         const { success } = logoutResponse.data;
         if (success) {
+            localStorage.removeItem('user-info')
             setuser('')
             navigate('/login')
         }
