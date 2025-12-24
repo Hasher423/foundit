@@ -1,2 +1,34 @@
-
 @import "tailwindcss";
+
+@font-face {
+    font-family: Manrope;
+    src: url('/Fonts/Menrope');
+}
+
+@font-face {
+    font-family: NeueMachina;
+    src: url('/Fonts/NeueMachina.ttf');
+}
+
+@font-face {
+    font-family: BBHBartle;
+    src: url('/Fonts/BBHBartle.ttf');
+}
+
+@font-face {
+    font-family: Inter;
+    src: url('/Fonts/inter-Semibold.ttf');
+}
+
+@font-face {
+    font-family: thunder;
+    src: url('/Fonts/Thunder-Medium.ttf');
+}
+
+@theme {
+    --font-Manrope: Manrope;
+    --font-NeueMachina: NeueMachina;
+    --font-Inter: Inter;
+    --font-thunder: thunder;
+    --font-BBHBartle: BBHBartle;
+}

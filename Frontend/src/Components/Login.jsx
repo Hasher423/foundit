@@ -1,39 +1,52 @@
 import { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+
 export default function Login() {
     const navigator = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
-    const handleGoogleLogin = async (authResult) => {
+    const handleSuccess = async (authResult) => {
         try {
-            if (authResult['code']) {
-                const result = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/user/auth/google?code=${authResult['code']}`, {
-                    withCredentials: true
-                });
-                console.log(result, "Done");
+            const result = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/user/auth/google?code=${authResult.code}`, {
+                withCredentials: true
+            });
+            console.log(result, "Done");
 
-                const { user, } = result.data;
+            const { user } = result.data;
 
-                const info = { user }
+            const info = { user };
 
-                localStorage.setItem('user-info', JSON.stringify(info))
-                navigator('/dashboard')
-            }
+            localStorage.setItem('user-info', JSON.stringify(info));
+            navigator('/dashboard');
         } catch (err) {
-            console.log(err)
-            setError("Login failed. Please try again.");
             console.error(err);
+            setError("Login failed. Please try again.");
         } finally {
             setLoading(false);
         }
     };
 
-    const GoogleLogin = useGoogleLogin({
-        onSuccess: handleGoogleLogin,
-        onError: handleGoogleLogin,
+    const handleError = (errorResponse) => {
+        console.log('OAuth Error:', errorResponse);
+        setError(`Login failed: ${errorResponse.error || 'Unknown'}`);
+        setLoading(false);
+    };
+
+    const handleNonOAuthError = (nonOAuthError) => {
+        console.log('Non-OAuth Error:', nonOAuthError);
+        if (nonOAuthError.type !== 'popup_closed') {
+            setError(`Error: ${nonOAuthError.type}`);
+        }
+        setLoading(false);
+    };
+
+    const googleLogin = useGoogleLogin({
+        onSuccess: handleSuccess,
+        onError: handleError,
+        onNonOAuthError: handleNonOAuthError,
         flow: "auth-code",
     });
 
@@ -41,39 +54,40 @@ export default function Login() {
     const handleLoginClick = () => {
         setLoading(true);
         setError("");
-        GoogleLogin();
+        googleLogin();
     };
 
-
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 p-4 relative overflow-hidden">
-            {/* Background Elements */}
+        <div className="min-h-screen flex font-NeueMachina items-center justify-center bg-gradient-to-br from-gray-800 via-indigo-800 to-purple-800 p-4 relative overflow-hidden">
+            {/* Background Elements - Enhanced for luxury with subtle glows */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.1)_0%,transparent_50%)] pointer-events-none"></div>
-            <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-indigo-400/10 rounded-full blur-3xl animate-pulse"></div>
             <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+            <div className="absolute top-10 right-10 w-48 h-48 bg-amber-200/10 rounded-full blur-2xl animate-pulse delay-500"></div> {/* Adjusted gold glow for luxury */}
 
-            {/* Card */}
-            <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl max-w-md w-full p-8 text-center transform transition-all duration-300 hover:scale-105 z-10">
-                {/* App Logo */}
+            {/* Card - Luxury redesign: slightly lighter dark, gold accents, sleek borders */}
+            <div className="bg-gray-900/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-amber-200/30 max-w-md w-full p-8 text-center transform transition-all duration-500 hover:scale-105 hover:shadow-amber-200/20 z-10">
+                {/* App Logo - BBH font for heading, with brighter luxury gold gradient */}
                 <div className="mb-6">
-                    <h1 className="text-4xl font-bold text-indigo-600 tracking-tight">FoundIt</h1>
+                    <h1 className="text-5xl font-BBHBartle font-bold bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent tracking-wide">FindIt</h1>
+                    <p className="text-amber-100 text-sm mt-2 font-NeueMachina">Reclaim what's yours – with a touch of magic ✨</p> {/* Brighter Gen Z-friendly tagline with emoji */}
                 </div>
 
                 {error && (
-                    <p className="text-red-500 mb-4 bg-red-100/50 p-3 rounded-lg text-sm flex items-center justify-center">
+                    <p className="text-red-300 mb-4 bg-red-800/30 p-3 rounded-lg text-sm flex items-center justify-center">
                         {error}
                     </p>
                 )}
 
-                {/* Google Login Button */}
+                {/* Google Login Button - Redesigned for luxury: gold hover, sleek, brighter text */}
                 <button
                     onClick={handleLoginClick}
                     disabled={loading}
-                    className="w-full bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center space-x-3 disabled:opacity-50 shadow-sm"
+                    className="w-full bg-gray-800 border border-amber-200/40 hover:bg-amber-200/10 hover:border-amber-200/60 text-amber-100 font-NeueMachina font-semibold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center space-x-3 disabled:opacity-50 shadow-md hover:shadow-amber-200/30"
                 >
                     {loading ? (
                         <svg
-                            className="animate-spin h-5 w-5 text-gray-500"
+                            className="animate-spin h-5 w-5 text-amber-300"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
