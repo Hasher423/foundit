@@ -1,34 +1,15 @@
 import React from 'react'
 import { useNavigate, Route, Router, Routes, Navigate } from 'react-router-dom'
-import Login from './Components/Login'
-import NotFound from './Components/NotFound'
-import { GoogleOAuthProvider } from '@react-oauth/google'
-import { useState } from 'react'
-import RefreshHandler from './Components/RefreshHandler'
-import Dashboard from './Components/Dashboard'
-
+import Signup from './Components/Signup'
 const App = () => {
-  const [isAutheticated, setIsAutheticated] = useState(false)
-  const GoogleAuthWrapper = () => {
-    return (
-      <GoogleOAuthProvider clientId={import.meta.env.VITE_CLIENT_ID}>
-        <Login />
-      </GoogleOAuthProvider>
-    )
-  }
-
-  const PrivateRoute = ({ element }) => {
-    return isAutheticated ? element : <Navigate to={'/login'} replace/>
-  }
-
+  
 
   return (
     <div>
-      <RefreshHandler setIsAutheticated={setIsAutheticated} />
       <Routes>
-        <Route path='/login' element={<GoogleAuthWrapper />} />
-        <Route path='/dashboard' element={<PrivateRoute element={<Dashboard />} />} />
-        <Route path='*' element={<NotFound />} />
+        <Route path='/signup' element={<Signup />} />
+        {/* <Route path='/dashboard' element={} />
+        <Route path='*' element={} /> */}
       </Routes>
     </div>
   )
