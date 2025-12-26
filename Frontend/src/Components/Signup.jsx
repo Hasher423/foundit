@@ -166,13 +166,13 @@ const Signup = () => {
 
     return (
         <>
-            <div className='h-full w-full absolute top-0 left-0'>
+            <div className='h-full w-full absolute top-0 left-0 '>
                 <video autoPlay muted loop className='w-full h-full object-cover' src="https://ik.imagekit.io/sheryians/job_portal_uploads/bggggg_N0FaIX7D3.mp4?updatedAt=1761376198530"></video>
             </div>
-            <div className="md:flex h-screen relative z-10  bg-cover w-full md:bg-[url('')] bg-[url('https://pg-frontend-pi-six.vercel.app/Images/bg.jpg')] font-NeueMachina text-white overflow-hidden">
+            <div className="md:flex h-screen relative z-10  bg-cover w-full md:bg-[url('')] ">
 
                 {/* Left side with abstract background and text */}
-                <div className="flex-[.8] md:block hidden m-[clamp(1rem,calc(.5vw+.7rem),3rem)] 
+                <div className="flex-[.8] md:block hidden text-white font-NeueMachina m-[clamp(1rem,calc(.5vw+.7rem),3rem)] 
                       rounded-2xl bg-cover bg-center flex flex-col justify-center relative overflow-hidden">
                     <h1 className="text-[clamp(2rem,calc(3.5vw+.9rem),6rem)]  absolute bottom-10 font-extralight  w-full leading-none">
                         Track Down Your Lost <span className="">Belongings</span>
@@ -180,8 +180,8 @@ const Signup = () => {
                 </div>
 
                 {/* Right side with form */}
-                <div className="flex-1 flex flex-col justify-center items-center p-10 ">
-                    <h2 className="text-4xl font-bold mb-10">Registration</h2>
+                <div className="flex-1 flex flex-col font-NeueMachina justify-center items-center p-10 ">
+                    <h2 className="text-4xl font-bold mb-10 text-white">Registration</h2>
                     <div className="bg-gray-900 rounded-lg p-6 w-80">
                         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                             <input
