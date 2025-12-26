@@ -37,7 +37,8 @@ app.get('/', (req, res) => {
     res.send("Server is working !");
 });
 
-app.use('/user/auth', authRouter);
+app.use('/user', authRouter);
+app.use('/user/access', authRouter);
 
 // Start server
 app.listen(process.env.PORT, () => {
