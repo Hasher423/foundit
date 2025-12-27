@@ -175,7 +175,7 @@ const Signup = () => {
                 <div className="flex-[.8] md:block hidden text-white font-NeueMachina m-[clamp(1rem,calc(.5vw+.7rem),3rem)] 
                       rounded-2xl bg-cover bg-center flex flex-col justify-center relative overflow-hidden">
                     <h1 className="text-[clamp(2rem,calc(3.5vw+.9rem),6rem)]  absolute bottom-10 font-extralight  w-full leading-none">
-                        Track Down Your Lost <span className="">Belongings</span>
+                        Track Down Your Lost <span className="">Belongings </span>
                     </h1>
                 </div>
 

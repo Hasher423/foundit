@@ -1,28 +1,34 @@
-import axios from 'axios'
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import ReportedItems from './ReportedItems';
+import Header from './header';
+
 const Dashboard = () => {
     const navigate = useNavigate();
-    const  user  = JSON.parse(localStorage.getItem('user'))
+    const user = JSON.parse(localStorage.getItem('user'));
 
-    const handleLogout = async () => {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/user/logout`, {
-            withCredentials: true,
-        });
+    const handleReportClick = () => {
+        // Navigate to a report page or open a modal
+        navigate('/reportItem'); // You need to create this route/component
+    };
 
-        const { success } = response.data;
-        if (success) {
-            localStorage.removeItem('user');
-            navigate('/signup')
-        }
-    }
     return (
-        <div className='flex flex-col h-screen gap-6 items-center justify-center'>
-            Hello,{user.name}
-            <img src={user.avatar} className='w-20 h-20 rounded-3xl' alt="" />
-            <button onClick={handleLogout} className='px-2 py-2 bg-red-900 text-white rounded '>Logout</button>
-        </div>
-    )
-}
+        <div className=''>
+            <Header />
+            
+            <div className="max-w-6xl mx-auto my-6 flex justify-end">
+                <button
+                    onClick={handleReportClick}
+                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                >
+                    Report Item
+                </button>
+            </div>
 
-export default Dashboard
+            <ReportedItems />
+        </div>
+    );
+};
+
+export default Dashboard;
