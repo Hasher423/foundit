@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import DbConnection from './Utils/DbConnection.js';
 import 'dotenv/config';
 import authRouter from './Routes/auth.route.js';
+import itemRouter from './Routes/item.route.js'
 import morgan from 'morgan';
 
 DbConnection();
@@ -39,6 +40,7 @@ app.get('/', (req, res) => {
 
 app.use('/user', authRouter);
 app.use('/user/access', authRouter);
+app.use('/item', itemRouter)
 
 // Start server
 app.listen(process.env.PORT, () => {
