@@ -1,5 +1,12 @@
 import express, { urlencoded } from 'express';
 import cors from 'cors';
+app.use(cors({
+    origin: 'https://foundit-nu.vercel.app',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 import cookieParser from 'cookie-parser';
 import DbConnection from './Utils/DbConnection.js';
 import 'dotenv/config';
@@ -17,30 +24,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser());
 app.use(morgan('dev'));
 
-app.use(cors({
-    origin: 'https://foundit-nu.vercel.app',
-    credentials: true
-}));
-
-
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://foundit-nu.vercel.app');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    );
-    res.header(
-        'Access-Control-Allow-Methods',
-        'GET, POST, PUT, PATCH, DELETE, OPTIONS'
-    );
-
-    if (req.method === 'OPTIONS') {
-        return res.sendStatus(200);
-    }
-
-    next();
-});
 
 
 // Routes
