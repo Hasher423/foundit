@@ -10,7 +10,7 @@ import morgan from 'morgan';
 DbConnection();
 
 const app = express();
- 
+
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
@@ -23,13 +23,23 @@ app.use(cors({
 }));
 
 
-
 app.use((req, res, next) => {
-  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-  res.setHeader('Pragma', 'no-cache');
-  res.setHeader('Expires', '0');
-  res.setHeader('Surrogate-Control', 'no-store'); // for CDNs/proxies
-  next();
+    res.header('Access-Control-Allow-Origin', process.env.FRONTEND_URI);
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    );
+    res.header(
+        'Access-Control-Allow-Methods',
+        'GET, POST, PUT, PATCH, DELETE, OPTIONS'
+    );
+
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200);
+    }
+
+    next();
 });
 
 
