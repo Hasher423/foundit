@@ -15,10 +15,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser());
-app.use(morgan('dev'))
-console.log(process.env.FRONTEND_URI)
+app.use(morgan('dev'));
+
 app.use(cors({
-    origin: process.env.FRONTEND_URI,
+    origin: 'https://foundit-nu.vercel.app',
     credentials: true
 }));
 
