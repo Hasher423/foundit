@@ -1,11 +1,6 @@
 import express, { urlencoded } from 'express';
 import cors from 'cors';
-app.use(cors({
-    origin: 'https://foundit-nu.vercel.app',
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
+
 
 import cookieParser from 'cookie-parser';
 import DbConnection from './Utils/DbConnection.js';
@@ -17,6 +12,14 @@ import morgan from 'morgan';
 DbConnection();
 
 const app = express();
+
+app.use(cors({
+    origin: 'https://foundit-nu.vercel.app',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 
 // Middlewares
 app.use(express.json());
