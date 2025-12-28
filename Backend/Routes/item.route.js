@@ -5,7 +5,7 @@ import { itemController, filterItemsController, getItems, Search } from '../Cont
 const   Router = express.Router();
 
 Router.options('/report', (req, res) => res.sendStatus(200));
-Router.post('/report', authMiddleware, upload.single('image'), itemController)
+Router.post('/report',  upload.single('image'), itemController)
 Router.get('/filter', filterItemsController);
 Router.get('/getItems',getItems)
 Router.get('/search',Search)

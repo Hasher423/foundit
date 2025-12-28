@@ -78,7 +78,7 @@ const ReportItem = () => {
         formdata.append("title", formData.title)
         console.log("Form Data Submitted:");
         console.log(formdata);
-        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/item/report`, formdata, { withCredentials: true });
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/item/report`, formdata, );
         console.log(response.data)
         // Here you could use FormData to send image + other data to backend
         // navigate("/dashboard"); 
