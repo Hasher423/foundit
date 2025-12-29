@@ -5,7 +5,7 @@ import axios from "axios";
 
 const ReportItem = () => {
     const navigate = useNavigate();
-
+    const user = JSON.parse(localStorage.getItem('user'))
     const [formData, setFormData] = useState({
         type: "lost",
         itemType: "",
@@ -46,10 +46,11 @@ const ReportItem = () => {
         useMapEvents({
             click(e) {
                 const coords = [e.latlng.lat, e.latlng.lng];
+                console.log(coords)
                 setMarkerPosition(coords);
                 setFormData((prev) => ({
                     ...prev,
-                    location: `${coords[0].toFixed(4)}, ${coords[1].toFixed(4)}`,
+                    location: `${coords[1].toFixed(4)}, ${coords[0].toFixed(4)}`,
                 }));
             },
         });
@@ -76,9 +77,10 @@ const ReportItem = () => {
         formdata.append("description", formData.description)
         formdata.append("location", formData.location)
         formdata.append("title", formData.title)
+        formdata.append("Email", user.email)
         console.log("Form Data Submitted:");
         console.log(formdata);
-        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/item/report`, formdata, );
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/item/report`, formdata, { withCredentials: true });
         console.log(response.data)
         // Here you could use FormData to send image + other data to backend
         // navigate("/dashboard"); 

@@ -1,15 +1,16 @@
 import itemModel from "../Models/item.model.js";
+import { runMatchingEngine } from "../Utils/matchingEngine.js";
 
 
 
 export const itemController = async (req, res) => {
     try {
-        const { type, title, description, category, date, location } = req.body;
+        const { type, title, description, category, date, location, Email } = req.body;
         const file = req.file;
         const coords = req.body.location.split(',').map(coord => parseFloat(coord));
+        
 
         // if (!file) return res.status(400).json({ message: "Image is required" });
-
         // Create item in one step
         const newItem = await itemModel.create({
             type: type.toUpperCase(),
@@ -20,10 +21,13 @@ export const itemController = async (req, res) => {
                 type: "Point",
                 coordinates: coords, // [lng, lat] as JSON string from frontend
             },
+            email: Email,
             Date: new Date(date),
             image: file?.path, // Cloudinary URL
             createdBy: '694e17b66aaa33cb72e20be8',
         });
+
+        if(type === 'lost' || 'LOST ' || 'Lost') runMatchingEngine(newItem)
         res.status(201).json({
             success: true,
             message: `${type} item reported successfully`,
@@ -60,7 +64,6 @@ export const filterItemsController = async (req, res) => {
         }
 
         const items = await itemModel.find(filter);
-        console.log(items)
         res.status(200).json({ success: true, items });
     } catch (err) {
         console.error(err);

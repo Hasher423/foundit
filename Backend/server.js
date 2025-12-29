@@ -14,7 +14,7 @@ DbConnection();
 const app = express();
 
 app.use(cors({
-    origin: 'https://foundit-nu.vercel.app',
+    origin: process.env.FRONTEND_URI,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
