@@ -17,7 +17,8 @@ app.use(cors({
     origin: process.env.FRONTEND_URI,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials:true,
 }));
 
 
@@ -26,13 +27,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser());
 app.use(morgan('dev'));
-
+app.options("*", cors());
 
 
 // Routes
 app.get('/', (req, res) => {
     res.send("Server is working !");
 });
+
+
 
 app.use('/user', authRouter);
 app.use('/user/access', authRouter);
