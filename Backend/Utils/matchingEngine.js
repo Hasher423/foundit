@@ -7,7 +7,6 @@ import { sendMail } from "./sendMail.js";
 export const runMatchingEngine = async (item) => {
     try {
         const CONFIDENCE_THRESHOLD = 0.7;
-        const number  = [];
         console.log(item)
         const { type, location, date, description } = item;
 
@@ -35,12 +34,10 @@ export const runMatchingEngine = async (item) => {
 
             // Type/category match
             if (item.category === candidate.category) score += 0.2;
-            console.log(item.category === candidate.category)
             console.log(score)
             // Date similarity (within ±7 days)
             const diffDays = Math.abs(new Date(item.Date) - new Date(candidate.Date)) / (1000 * 60 * 60 * 24);
             if (diffDays <= 7) score += 0.3;
-            console.log(score)
 
             if (score >= CONFIDENCE_THRESHOLD) {
                 console.log('Email !')
