@@ -8,9 +8,11 @@ export const itemController = async (req, res) => {
     try {
         const { type, title, description, category, date, location, Email } = req.body;
         const coords = req.body.location.split(',').map(coord => parseFloat(coord));
-
+        let uploadedFile;
         // if (!file) return res.status(400).json({ message: "Image is required" });
-        const uploadedFile = await uploadToCloudinary(req.file.buffer);
+        if (req.file) {
+            uploadedFile = await uploadToCloudinary(req.file.buffer);
+        }
 
         // Create item in one step
         const newItem = await itemModel.create({
@@ -24,7 +26,7 @@ export const itemController = async (req, res) => {
             },
             email: Email,
             Date: new Date(date),
-            image: uploadedFile.secure_url, // Cloudinary URL
+            image: uploadedFile?.secure_url, // Cloudinary URL
             createdBy: '694e17b66aaa33cb72e20be8',
         });
 
