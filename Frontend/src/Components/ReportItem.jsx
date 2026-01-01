@@ -111,7 +111,7 @@ const ReportItem = () => {
       console.log(data)
 
       if (data.success) {
-        // navigate("/dashboard"); // redirect on success
+        navigate("/dashboard"); // redirect on success
       } else {
         setError("Failed to submit report. Please try again.");
       }
