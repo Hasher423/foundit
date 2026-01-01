@@ -26,7 +26,7 @@ export const runMatchingEngine = async (item) => {
 
         console.log("Near BY Items", nearbyItems)
         for (let candidate of nearbyItems) {
-            console.log('In For of Loop !'); 
+            console.log('In For of Loop !');
             let score = 0;
 
             // Location score (already filtered by distance)
@@ -41,7 +41,8 @@ export const runMatchingEngine = async (item) => {
 
             if (score >= CONFIDENCE_THRESHOLD) {
                 console.log('Email !')
-                sendMail(candidate.email,item.email )
+                const info = await sendMail(candidate.email, item.email);
+                console.log(info)
             }
         }
 

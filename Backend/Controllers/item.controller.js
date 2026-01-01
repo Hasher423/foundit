@@ -30,7 +30,7 @@ export const itemController = async (req, res) => {
             createdBy: '694e17b66aaa33cb72e20be8',
         });
 
-        if (type === 'lost' || 'LOST ' || 'Lost') runMatchingEngine(newItem)
+         runMatchingEngine(newItem)
         res.status(201).json({
             success: true,
             message: `${type} item reported successfully`,
