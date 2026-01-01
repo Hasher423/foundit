@@ -54,6 +54,7 @@ const Login = () => {
 
   const handleGoogleLogin = async () => {
     try {
+      setIsSubmitting(true)
       const result = await signInWithPopup(auth, new GoogleAuthProvider());
       const pendingEmail = sessionStorage.getItem('pendingEmailCred');
       if (pendingEmail) {
@@ -72,6 +73,7 @@ const Login = () => {
 
   const handleGithubLogin = async () => {
     try {
+      setIsSubmitting(true)
       const result = await signInWithPopup(auth, new GithubAuthProvider());
       const pendingEmail = sessionStorage.getItem('pendingEmailCred');
       if (pendingEmail) {
