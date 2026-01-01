@@ -34,7 +34,7 @@ export const runMatchingEngine = async (item) => {
             // Type/category match
             if(item.type != candidate.type) score +=0.1;
             if (item.category === candidate.category) score += 0.1;
-            if(item.title == item.title) score += 0.4
+            if(item.title == candidate.title) score += 0.4
             console.log(score)
             // Date similarity (within ±7 days)
             const diffDays = Math.abs(new Date(item.Date) - new Date(candidate.Date)) / (1000 * 60 * 60 * 24);
