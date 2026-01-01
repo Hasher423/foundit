@@ -98,6 +98,8 @@ const Signup = () => {
 
     const handleGoogleLogin = async () => {
         try {
+
+            setIsSubmitting(true);
             const result = await signInWithPopup(auth, new GoogleAuthProvider());
 
             // Link pending GitHub credential
@@ -126,6 +128,8 @@ const Signup = () => {
             } else {
                 setError(err.message);
             }
+        } finally {
+            setIsSubmitting(false)
         }
     };
 
@@ -135,6 +139,8 @@ const Signup = () => {
 
     const handleGithubLogin = async () => {
         try {
+
+            setIsSubmitting(true);
             const result = await signInWithPopup(auth, new GithubAuthProvider());
             const idToken = await result.user.getIdToken();
             await storeUserInDb(idToken);
@@ -154,6 +160,8 @@ const Signup = () => {
             } else {
                 setError(err.message);
             }
+        } finally {
+            setIsSubmitting(false)
         }
     };
 
