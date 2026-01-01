@@ -144,7 +144,7 @@ const ReportedItems = () => {
 
                             <p className="text-sm text-gray-600 flex items-center mb-3">
                                 <FaCalendarAlt className="mr-2 text-blue-500" />
-                                {item?.createdAt
+                                {item?.Date
                                     ? new Date(item.createdAt).toLocaleDateString("en-US", {
                                         year: "numeric",
                                         month: "long",
@@ -158,12 +158,12 @@ const ReportedItems = () => {
                             </p>
 
                             <div className="flex justify-between">
-                                <button className="px-4 py-2 bg-blue-600 text-white rounded-lg">
+                                {/* <button className="px-4 py-2 bg-blue-600 text-white rounded-lg">
                                     View Details
-                                </button>
-                                <button className="px-4 py-2 bg-gray-200 rounded-lg">
+                                </button> */}
+                                {/* <button className="px-4 py-2 bg-gray-200 rounded-lg">
                                     {item.type === 'found' ? 'Claim' : 'Contact'}
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                     </div>
