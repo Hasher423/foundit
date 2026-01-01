@@ -1,16 +1,17 @@
 import itemModel from "../Models/item.model.js";
 import { runMatchingEngine } from "../Utils/matchingEngine.js";
+import { uploadToCloudinary } from "../Utils/toCloudinary.js";
 
 
 
 export const itemController = async (req, res) => {
     try {
         const { type, title, description, category, date, location, Email } = req.body;
-        const file = req.file;
         const coords = req.body.location.split(',').map(coord => parseFloat(coord));
-        
 
         // if (!file) return res.status(400).json({ message: "Image is required" });
+        const uploadedFile = await uploadToCloudinary(req.file.buffer);
+
         // Create item in one step
         const newItem = await itemModel.create({
             type: type.toUpperCase(),
@@ -23,11 +24,11 @@ export const itemController = async (req, res) => {
             },
             email: Email,
             Date: new Date(date),
-            image: file?.path, // Cloudinary URL
+            image: uploadedFile.secure_url, // Cloudinary URL
             createdBy: '694e17b66aaa33cb72e20be8',
         });
 
-        if(type === 'lost' || 'LOST ' || 'Lost') runMatchingEngine(newItem)
+        if (type === 'lost' || 'LOST ' || 'Lost') runMatchingEngine(newItem)
         res.status(201).json({
             success: true,
             message: `${type} item reported successfully`,
