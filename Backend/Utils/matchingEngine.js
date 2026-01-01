@@ -49,6 +49,6 @@ export const runMatchingEngine = async (item) => {
 
 
     } catch (error) {
-
+        console.log(error)
     }
 }
