@@ -145,7 +145,7 @@ const ReportedItems = () => {
                             <p className="text-sm text-gray-600 flex items-center mb-3">
                                 <FaCalendarAlt className="mr-2 text-blue-500" />
                                 {item?.Date
-                                    ? new Date(item.createdAt).toLocaleDateString("en-US", {
+                                    ? new Date(item.Date).toLocaleDateString("en-US", {
                                         year: "numeric",
                                         month: "long",
                                         day: "numeric"
