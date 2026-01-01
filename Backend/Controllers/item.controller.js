@@ -29,8 +29,7 @@ export const itemController = async (req, res) => {
             image: uploadedFile?.secure_url, // Cloudinary URL
             createdBy: '694e17b66aaa33cb72e20be8',
         });
-
-         await runMatchingEngine(newItem)
+        if (type == 'lost' || 'Lost' || 'LOST') await runMatchingEngine(newItem)
         res.status(201).json({
             success: true,
             message: `${type} item reported successfully`,
