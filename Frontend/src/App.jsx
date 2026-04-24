@@ -24,6 +24,7 @@ const App = () => {
   return (
     <div>
       <Routes>
+         <Route path='/' element={<PublicRoute element={<Login />} />} />
         <Route path='/login' element={<PublicRoute element={<Login />} />} />
         <Route path='/signup' element={<PublicRoute element={<Signup />} />} />
         <Route path='/dashboard' element={<RefreshHandler element={<Dashboard />} isAuthenticated={isAuthenticated} />} />
