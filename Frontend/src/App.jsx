@@ -16,15 +16,18 @@ const App = () => {
     return isAuthenticated ? element : <Navigate to="/signup" replace />;
   };
 
-  const PublicRoute = ({ element }) => {
-    const user = localStorage.getItem('user');
-    return user ? <Navigate to={'/dashboard'} /> : element
-  }
+  const PublicRoute = ({ element, isAuthenticated, loading }) => {
+  if (loading) return <div>Loading...</div>;
+
+  return isAuthenticated
+    ? <Navigate to="/dashboard" replace />
+    : element;
+};
 
   return (
     <div>
       <Routes>
-         <Route path='/' element={<PublicRoute element={<Login />} />} />
+         <Route path='/' element={<PublicRoute element={<Login />} isAutheticated={isAuthenticated} loading={loading} } />} />
         <Route path='/login' element={<PublicRoute element={<Login />} />} />
         <Route path='/signup' element={<PublicRoute element={<Signup />} />} />
         <Route path='/dashboard' element={<RefreshHandler element={<Dashboard />} isAuthenticated={isAuthenticated} />} />
