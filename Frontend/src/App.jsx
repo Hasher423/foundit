@@ -27,14 +27,69 @@ const App = () => {
   return (
     <div>
       <Routes>
-         <Route path='/' element={<PublicRoute element={<Login />} isAutheticated={isAuthenticated} loading={loading} } />} />
-        <Route path='/login' element={<PublicRoute element={<Login />} isAutheticated={isAuthenticated} loading={loading} } />} />
-        <Route path='/signup' element={<PublicRoute element={<Signup />} isAutheticated={isAuthenticated} loading={loading} } />} />
-        <Route path='/dashboard' element={<RefreshHandler element={<Dashboard />} isAuthenticated={isAuthenticated} />} />
-        <Route path='/profile' element={<RefreshHandler element={<Profile />} isAuthenticated={isAuthenticated} />} />
-        <Route path='/reportItem' element={<RefreshHandler element={<ReportItem />} isAuthenticated={isAuthenticated} />} />
-        {/* <Route path='*' element={} /> */}
-      </Routes>
+  <Route
+    path="/"
+    element={
+      <PublicRoute
+        element={<Login />}
+        isAuthenticated={isAuthenticated}
+        loading={loading}
+      />
+    }
+  />
+
+  <Route
+    path="/login"
+    element={
+      <PublicRoute
+        element={<Login />}
+        isAuthenticated={isAuthenticated}
+        loading={loading}
+      />
+    }
+  />
+
+  <Route
+    path="/signup"
+    element={
+      <PublicRoute
+        element={<Signup />}
+        isAuthenticated={isAuthenticated}
+        loading={loading}
+      />
+    }
+  />
+
+  <Route
+    path="/dashboard"
+    element={
+      <RefreshHandler
+        element={<Dashboard />}
+        isAuthenticated={isAuthenticated}
+      />
+    }
+  />
+
+  <Route
+    path="/profile"
+    element={
+      <RefreshHandler
+        element={<Profile />}
+        isAuthenticated={isAuthenticated}
+      />
+    }
+  />
+
+  <Route
+    path="/reportItem"
+    element={
+      <RefreshHandler
+        element={<ReportItem />}
+        isAuthenticated={isAuthenticated}
+      />
+    }
+  />
+</Routes>
     </div>
   )
 }
