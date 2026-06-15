@@ -1,42 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 const RefreshHandler = ({ setIsAuthenticated, element }) => {
-    const navigate = useNavigate();
-    const [isloggedIn, setisloggedIn] = useState(false)
+  const [loading, setLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    useEffect(() => {
+  useEffect(() => {
+    const verifyLogin = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URI}/user/isloggedIn`,
+          { withCredentials: true }
+        );
 
-        const verifyLogin = async () => {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/user/isloggedIn`, {
-                    withCredentials: true,
-                });
-                const { loggedIn } = response.data;
-                console.log(loggedIn)
-                if (loggedIn) {
-                    setisloggedIn(true)
-                }
-            } catch (err) {
-                console.log(err)
-                navigate('/login')
-            }
-        };
+        const { loggedIn } = response.data;
 
-        verifyLogin();
-    }, []);
+        setIsLoggedIn(loggedIn);
+        setIsAuthenticated?.(loggedIn);
+      } catch (err) {
+        setIsLoggedIn(false);
+        setIsAuthenticated?.(false);
+      } finally {
+        setLoading(false);
+      }
+    };
 
+    verifyLogin();
+  }, []);
 
+  if (loading) return <div>Checking...</div>;
 
-
-
-
-
-    if (isloggedIn === false) return <div>Checking...</div>
-
-    return isloggedIn ? element : <Navigate to="/login" />;
+  return isLoggedIn ? element : <Navigate to="/login" replace />;
 };
 
 export default RefreshHandler;
