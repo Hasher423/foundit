@@ -28,8 +28,8 @@ const App = () => {
     <div>
       <Routes>
          <Route path='/' element={<PublicRoute element={<Login />} isAutheticated={isAuthenticated} loading={loading} } />} />
-        <Route path='/login' element={<PublicRoute element={<Login />} />} />
-        <Route path='/signup' element={<PublicRoute element={<Signup />} />} />
+        <Route path='/login' element={<PublicRoute element={<Login />} isAutheticated={isAuthenticated} loading={loading} } />} />
+        <Route path='/signup' element={<PublicRoute element={<Signup />} isAutheticated={isAuthenticated} loading={loading} } />} />
         <Route path='/dashboard' element={<RefreshHandler element={<Dashboard />} isAuthenticated={isAuthenticated} />} />
         <Route path='/profile' element={<RefreshHandler element={<Profile />} isAuthenticated={isAuthenticated} />} />
         <Route path='/reportItem' element={<RefreshHandler element={<ReportItem />} isAuthenticated={isAuthenticated} />} />
